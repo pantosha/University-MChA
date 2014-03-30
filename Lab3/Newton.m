@@ -16,10 +16,11 @@ EPS = 10^(-14);
             x_n = x - y/dy;
             if abs(x_n - x) < tolerance
                 x = x_n;
-                break;
+                return;
             end
             x = x_n;
         end
+        warning('Max number of tolerance (%d/%d) exceeded.', i, NMAX);
     end
 X = zeros(size(L, 1), 1);
 I = zeros(size(L, 1), 1);
