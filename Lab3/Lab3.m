@@ -54,3 +54,7 @@ disp([X iteration]);
 disp('Newtons method:');
 [X, iteration] = Newton(poly, L, 10^(-4));
 disp([X iteration]);
+
+disp('Secant method:');
+[X, iteration] = Secant(poly, L, 10^(-4));
+disp([X iteration]);
