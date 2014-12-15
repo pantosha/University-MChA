@@ -20,10 +20,10 @@ for j = 1:length(x)
     u(j, :, 1) = cos(2*x(j)).*sinh(y);
 end
 for n = 1:length(t)
-    u(1, :, n) = gx_l(y, n);
-    u(end, :, n) = gx_r(y, n);
-    u(:, 1, n) = gy_l(x, n);
-    u(:, end, n) = gy_r(x, n);
+    u(1, :, n) = gx_l(y, t(n));
+    u(end, :, n) = gx_r(y, t(n));
+    u(:, 1, n) = gy_l(x, t(n));
+    u(:, end, n) = gy_r(x, t(n));
 end
 
 for n = 1:2:length(t)-2
@@ -31,7 +31,7 @@ for n = 1:2:length(t)-2
     beta = zeros(length(x));
     for k = 2:length(y)-1
         alpha(1) = 0;
-        beta(1) = gx_l(y(k-1), t(n+1));
+        beta(1) = gx_l(y(k), t(n+1));
         a = -s*tao/hx^2;
         b = 1 + 2*s*tao/hx^2;% + k.*tao;
         c = -s*tao/hx^2;
@@ -51,7 +51,7 @@ for n = 1:2:length(t)-2
     beta = zeros(length(y));
     for j = 2:length(x)-1
         alpha(1) = 0;
-        beta(1) = gy_l(x(j-1), t(n+2));
+        beta(1) = gy_l(x(j), t(n+2));
         a = -s*tao/hy^2;
         b = 1 + 2*s*tao/hy^2;
         c = -s*tao/hy^2;
@@ -74,7 +74,7 @@ end
 % set(su, 'LineStyle', 'none');
 while 1
     for i = 1:2:length(t);
-        j = surf(y, x(2:end-1), u(2:end-1, :, i));
+        j = surf(y, x(:), u(:, :, i));
         set(j, 'LineStyle', 'none');
         zlim([-0.5 0.5]);
         f = getframe;
